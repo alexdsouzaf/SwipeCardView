@@ -448,21 +448,25 @@ namespace MLToolkit.Forms.SwipeCardView
                 }
 
                 var card = _cards[i];
-                card.BindingContext = ItemsSource[_itemIndex];
-
+                
                 if (i == 0)
                 {
                     TopItem = ItemsSource[_itemIndex];
                 }
 
-                ViewExtensions.CancelAnimations(card);
-                card.Scale = GetScale(i);
-                card.Rotation = 0;
-                card.TranslationX = 0;
-                card.TranslationY = -card.Y;
-                ((RelativeLayout)Content).LowerChild(card);
-                card.IsVisible = true;
-                _itemIndex++;
+                if (card != null)
+                {
+                    card.BindingContext = ItemsSource[_itemIndex];
+
+                    ViewExtensions.CancelAnimations(card);
+                    card.Scale = GetScale(i);
+                    card.Rotation = 0;
+                    card.TranslationX = 0;
+                    card.TranslationY = -card.Y;
+                    ((RelativeLayout)Content).LowerChild(card);
+                    card.IsVisible = true;
+                    _itemIndex++;
+                }
             }
             Content.IsVisible = wasVisible;
         }
